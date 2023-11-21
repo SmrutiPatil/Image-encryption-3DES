@@ -93,7 +93,8 @@ def encryptor(path):
             "			Encryption failed...Possible causes:Library not installed properly/low device memory/Incorrect padding or conversions"
         )
         exit()
-    print(hash_of_original.digest())
+    # print(hash_of_original.digest())
+    # print(len(encrypted_image))
 
     encrypted_image += hash_of_original.digest()
 
@@ -150,7 +151,8 @@ def decryptor(encrypted_image_path):
     # extracting hash and cipher data without hash
     extracted_hash = encrypted_data_with_hash[-32:]
     encrypted_data = encrypted_data_with_hash[:-32]
-    print(encrypted_data)
+    print(len(extracted_hash))
+    # print(encrypted_data)
     print(len(encrypted_data))
 
     while len(encrypted_data) % 8 != 0:
@@ -162,7 +164,7 @@ def decryptor(encrypted_image_path):
     # Convert integer to binary string
     encrypted_data_bin = bin(encrypted_data_int)[2:]
     encrypted_data_bin += "00"
-    print(encrypted_data_bin)
+    # print(encrypted_data_bin)
     print(len(encrypted_data_bin))
     # print(type(encrypted_data_bin))
     # print(len(encrypted_data_bin))
