@@ -4,7 +4,6 @@ salt_const = "fcc124f84b0daaf7dfe85bcd05ce6f3f"
 
 from Crypto.Cipher import DES
 from Crypto.Hash import SHA256
-from getpass import getpass
 from Crypto.Protocol.KDF import PBKDF2
 
 
@@ -23,25 +22,12 @@ def encryptor(path, password):
     # SHA256 Hashing
     hash_of_original = SHA256.new(data=image)
 
-    # Password Stuff
-    # key_enc = getpass(prompt="Enter min of 8 character long password:")
     key_enc = password
 
     while len(key_enc) < 8:
         # key_enc = getpass(prompt="Password length < 8 char")
         exit()
 
-    # key_enc_confirm = getpass(prompt="Enter password again:")
-
-    # while key_enc != key_enc_confirm:
-    #     # print("Key Mismatch.Try again.")
-    #     # key_enc = getpass(prompt="Enter 8 character long password:")
-
-    #     while len(key_enc) < 8:
-    #         key_enc = getpass(
-    #             prompt="Invalid password! Enter atleast 8 character password:"
-    #         )
-    #     key_enc_confirm = getpass(prompt="Enter password again:")
 
     # Hashing Password
     key_enc = PBKDF2(key_enc, salt_const, 48, count=pi)
@@ -153,38 +139,3 @@ def decryptor(encrypted_image_path, password):
         except:
             print("failed Exiting...")
             exit()
-
-
-# print("Image Encryption using Triple-Des")
-# print("")
-
-# print("Provide an 8 Digit Long Password")
-
-# print("Encryption ")
-# print("Encrypting file size depends on the Ram and storage of the CPU")
-# print("")
-# print("")
-
-
-# # Menu Driven Approach
-# try:
-#     choice = int(input("		Press 1 for Encryption || 2 for Decryption: "))
-#     while choice != 1 and choice != 2:
-#         choice = int(input("		      Invalid Choice! Try Again:"))
-# except:
-#     print("Error, please provide valid Input")
-#     exit()
-
-
-# if choice == 1:
-#     # Encryption
-#     path = input("Enter image's name to be encypted:")
-#     encryptor(path)
-
-# else:
-#     # Decryption
-#     encrypted_image_path = input("Enter file name to decrypted:")
-#     decryptor(encrypted_image_path)
-
-# print("")
-# print("")

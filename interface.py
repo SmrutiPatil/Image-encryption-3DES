@@ -3,7 +3,8 @@ from tkinter import filedialog, simpledialog
 from getpass import getpass
 from tkinter import messagebox
 from Crypto.Protocol.KDF import PBKDF2
-from Triple_Des import encryptor, decryptor
+# from Triple_Des import encryptor, decryptor
+from main import encrypt_image, decrypt_image, encrypt_image_3Des, decrypt_image_3Des
 import os
 
 
@@ -15,6 +16,7 @@ class ImageEncryptorApp:
         # Variables
         self.file_path_var = tk.StringVar()
         self.choice_var = tk.StringVar(value="1")
+        self.algo_var = tk.StringVar(value="DES")
 
         # UI components
         self.create_widgets()
@@ -30,9 +32,16 @@ class ImageEncryptorApp:
         browse_button = tk.Button(self.root, text="Browse", command=self.browse_file)
         browse_button.pack(pady=5)
 
+        # Drop down menu for algorithm
+        algo_label = tk.Label(self.root, text="Choose Algorithm:")
+        algo_label.pack(pady=10)
+        algo_menu = tk.OptionMenu(self.root, self.algo_var, "DES", "Triple-DES", "AES")
+        algo_menu.pack()
+        
         # Choice (Encryption/Decryption)
         choice_label = tk.Label(self.root, text="Choose Action:")
         choice_label.pack(pady=10)
+        
 
         encryption_radio = tk.Radiobutton(
             self.root, text="Encryption", variable=self.choice_var, value="1"
@@ -43,15 +52,6 @@ class ImageEncryptorApp:
             self.root, text="Decryption", variable=self.choice_var, value="2"
         )
         decryption_radio.pack()
-
-        # Password Entry
-        # password_label = tk.Label(self.root, text="Password:")
-        # password_label.pack(pady=10)
-
-        # password_entry = tk.Entry(self.root, show="*")
-        # password_entry.pack(pady=5)
-
-        # password = simpledialog.askstring("Password", "Enter password:", show="*")
 
         # Process Button
         process_button = tk.Button(
@@ -74,20 +74,55 @@ class ImageEncryptorApp:
         file_path = self.file_path_var.get()
         file_path = os.path.basename(file_path)
         choice = self.choice_var.get()
+        algo = self.algo_var.get()
         # password = self.password
         # password = getpass(prompt="Enter password:")
 
-        if choice == "1":
+        if choice == "1" and algo == "DES":
             try:
                 password = self.get_password()
-                encryptor(file_path, password)
+                output_path = "encrypted_" + file_path
+                encrypt_image(file_path, password, output_path)
                 messagebox.showinfo("Success", "Encryption successful!")
             except Exception as e:
                 messagebox.showerror("Error", f"Encryption failed: {e}")
-        elif choice == "2":
+        elif choice == "2" and algo == "DES":
             try:
                 password = self.get_password()
-                decryptor(file_path, password)
+                output_path = "decrypted_" + file_path
+                decrypt_image(file_path, password, output_path)
+                messagebox.showinfo("Success", "Decryption successful!")
+            except Exception as e:
+                messagebox.showerror("Error", f"Decryption failed: {e}")
+        elif choice == "1" and algo == "Triple-DES":
+            try:
+                password = self.get_password()
+                output_path = "encrypted_" + file_path
+                encrypt_image_3Des(file_path, password, output_path)
+                messagebox.showinfo("Success", "Encryption successful!")
+            except Exception as e:
+                messagebox.showerror("Error", f"Encryption failed: {e}")
+        elif choice == "2" and algo == "Triple-DES":
+            try:
+                password = self.get_password()
+                output_path = "decrypted_" + file_path
+                decrypt_image_3Des(file_path, password, output_path)
+                messagebox.showinfo("Success", "Decryption successful!")
+            except Exception as e:
+                messagebox.showerror("Error", f"Decryption failed: {e}")
+        elif choice == "1" and algo == "AES":
+            try:
+                password = self.get_password()
+                output_path = "encrypted_" + file_path
+                encrypt_image(file_path, password, output_path)
+                messagebox.showinfo("Success", "Encryption successful!")
+            except Exception as e:
+                messagebox.showerror("Error", f"Encryption failed: {e}")
+        elif choice == "2" and algo == "AES":
+            try:
+                password = self.get_password()
+                output_path = "decrypted_" + file_path
+                decrypt_image(file_path, password, output_path)
                 messagebox.showinfo("Success", "Decryption successful!")
             except Exception as e:
                 messagebox.showerror("Error", f"Decryption failed: {e}")
