@@ -1,15 +1,12 @@
 # convert a.png to binary
-with open("abc.png", "rb") as imagefile:
+with open("D:\\Crypto Project\\bob-shared-key.txt", "rb") as imagefile:
     image = imagefile.read()
 
-# padding
-while len(image) % 8 != 0:
-    image += b" "
-image_int = int.from_bytes(image, byteorder="big")
 
-# Convert integer to binary string
-image_bin = bin(image_int)[2:]
-print(image_bin)
+print(image[:8])
+print(image[8:16])
+print(image[16:24])
+print(len(image))
 
 # with open("decrypted_abc.png", "rb") as imagefile:
 #     image1 = imagefile.read()

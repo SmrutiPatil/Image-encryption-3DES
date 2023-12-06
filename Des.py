@@ -55,6 +55,8 @@ def encrypt(message, key_main, length_image, **kwargs):
     # Key conversion to binary
     key_int = int.from_bytes(key_main, byteorder="big")
     key = bin(key_int)[2:]
+    # print(key)
+    # print(len(key))
 
     assert len(key) > 0, "No input key to perform encryption"
 
