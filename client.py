@@ -23,6 +23,7 @@ while True:
 
     # Receive a response from the server
     alice_public_key_bytes = client_socket.recv(1024)
+    
     if not alice_public_key_bytes:
         break  # If no data is received, break the loop
 
@@ -32,6 +33,9 @@ alice_public_key = x25519.X25519PublicKey.from_public_bytes(alice_public_key_byt
 
 # Perform key exchange using the received public key
 alice_shared_key = bob_private_key.exchange(alice_public_key)
+
+with open('bob-shared-key.txt','wb') as file:
+    file.write(alice_shared_key)
 
 # Print the shared key as bytes
 print('Client shared key (bytes):', alice_shared_key)

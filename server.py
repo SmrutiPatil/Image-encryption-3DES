@@ -21,6 +21,7 @@ print("Server listening on {}:{}".format(*server_address))
 client_socket, client_address = server_socket.accept()
 print("Connection from", client_address)
 bob_public_key = None
+
 while True:
     # Receive data from the client
     bob_public_key_bytes = client_socket.recv(1024)
@@ -34,6 +35,9 @@ while True:
     # Perform key exchange and send the shared key back to the client
     shared_key = alice_private_key.exchange(bob_public_key)
     print("Shared key (bytes):", shared_key)
+
+    with open('alice-shared-key.txt','wb') as file:
+        file.write(shared_key)
 
     # Send the bytes directly without conversion
     message = alice_public_key.public_bytes(

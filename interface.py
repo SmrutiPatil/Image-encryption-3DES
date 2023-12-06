@@ -35,7 +35,7 @@ class ImageEncryptorApp:
         # Drop down menu for algorithm
         algo_label = tk.Label(self.root, text="Choose Algorithm:")
         algo_label.pack(pady=10)
-        algo_menu = tk.OptionMenu(self.root, self.algo_var, "DES", "Triple-DES", "AES")
+        algo_menu = tk.OptionMenu(self.root, self.algo_var, "DES", "Triple-DES")
         algo_menu.pack()
         
         # Choice (Encryption/Decryption)
@@ -110,22 +110,22 @@ class ImageEncryptorApp:
                 messagebox.showinfo("Success", "Decryption successful!")
             except Exception as e:
                 messagebox.showerror("Error", f"Decryption failed: {e}")
-        elif choice == "1" and algo == "AES":
-            try:
-                password = self.get_password()
-                output_path = "encrypted_" + file_path
-                encrypt_image(file_path, password, output_path)
-                messagebox.showinfo("Success", "Encryption successful!")
-            except Exception as e:
-                messagebox.showerror("Error", f"Encryption failed: {e}")
-        elif choice == "2" and algo == "AES":
-            try:
-                password = self.get_password()
-                output_path = "decrypted_" + file_path
-                decrypt_image(file_path, password, output_path)
-                messagebox.showinfo("Success", "Decryption successful!")
-            except Exception as e:
-                messagebox.showerror("Error", f"Decryption failed: {e}")
+        # elif choice == "1" and algo == "AES":
+        #     try:
+        #         password = self.get_password()
+        #         output_path = "encrypted_" + file_path
+        #         encrypt_image(file_path, password, output_path)
+        #         messagebox.showinfo("Success", "Encryption successful!")
+        #     except Exception as e:
+        #         messagebox.showerror("Error", f"Encryption failed: {e}")
+        # elif choice == "2" and algo == "AES":
+        #     try:
+        #         password = self.get_password()
+        #         output_path = "decrypted_" + file_path
+        #         decrypt_image(file_path, password, output_path)
+        #         messagebox.showinfo("Success", "Decryption successful!")
+        #     except Exception as e:
+        #         messagebox.showerror("Error", f"Decryption failed: {e}")
 
 
 if __name__ == "__main__":
