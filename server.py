@@ -5,6 +5,7 @@ from cryptography.hazmat.primitives import serialization
 alice_private_key = x25519.X25519PrivateKey.generate()
 alice_public_key = alice_private_key.public_key()
 
+
 # Create a socket object
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
